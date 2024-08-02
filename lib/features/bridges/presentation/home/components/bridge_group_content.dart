@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:taipei_bridge_app/features/bridges/domain/enities/bridge.dart';
 
 class BridgeGroupContent extends StatelessWidget {
@@ -22,7 +23,9 @@ class BridgeGroupContent extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BridgeSubGroupHeader('${entries[index].key} ($innerIndex)'),
+                    BridgeSubGroupHeader('${entries[index].key} ($innerIndex)')
+                        .animate()
+                        .fade(),
                     const SizedBox(
                       height: 4,
                     ),
@@ -49,16 +52,20 @@ class _BridgeGroupTile extends StatelessWidget {
     return Wrap(
       spacing: 4,
       runSpacing: 4,
-      children: list.map((e) {
-        return Material(
-          elevation: 0.5,
-          borderRadius: BorderRadius.circular(4),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(6, 2, 6, 2),
-            child: Text(e.name),
-          ),
-        );
-      }).toList(),
+      children: list
+          .map((e) {
+            return Material(
+              elevation: 0.5,
+              borderRadius: BorderRadius.circular(4),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(6, 2, 6, 2),
+                child: Text(e.name),
+              ),
+            );
+          })
+          .toList()
+          .animate()
+          .fade(),
     );
   }
 }
