@@ -1,25 +1,21 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:taipei_bridge_app/features/bridges/data/data_sources/remote/birdge_api_service.dart';
 import 'package:taipei_bridge_app/features/bridges/data/models/bridge.dart';
 
 import '../../../../core/resources/data_state.dart';
 import '../../domain/repository/bridge_repository.dart';
 
 class BridgeRepositoryImpl implements BridgeRepository {
-  final Dio _dio;
+  final BirdgeApiService _apiService;
 
-  BridgeRepositoryImpl(this._dio);
+  BridgeRepositoryImpl(this._apiService);
 
   @override
   Future<DataState<List<BridgeModel>>> getTaipeiBridges() async {
     try {
-      final response = await _dio.get('/blobfs/Bridges.json');
-      if (response.statusCode == HttpStatus.ok) {
-        final List<dynamic> rawData = json.decode(response.data);
-        List<BridgeModel> res = rawData.map((f) => BridgeModel.fromJson(f)).toList();
-        return DataSuccess(res);
+      final response = await _apiService.getTaipeiBridges();
+      if (response.data != null) {
+        return DataSuccess(response.data!);
       } else {
         return DataFailed(
           DioException(
@@ -38,11 +34,9 @@ class BridgeRepositoryImpl implements BridgeRepository {
   @override
   Future<DataState<List<BridgeModel>>> getTaipeiFootBridges() async {
     try {
-      final response = await _dio.get('/blobfs/Footbridges.json');
-      if (response.statusCode == HttpStatus.ok) {
-        final List<dynamic> rawData = json.decode(response.data);
-        List<BridgeModel> res = rawData.map((f) => BridgeModel.fromJson(f)).toList();
-        return DataSuccess(res);
+      final response = await _apiService.getTaipeiFootBridges();
+      if (response.data != null) {
+        return DataSuccess(response.data!);
       } else {
         return DataFailed(
           DioException(
