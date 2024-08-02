@@ -1,0 +1,1 @@
+const String bridgeBaseUrl = 'https://tpnco.blob.core.windows.net';

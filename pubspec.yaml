@@ -9,18 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
   cupertino_icons: ^1.0.8
   equatable: ^2.0.5
   dio: ^5.5.0+1
-  http: ^1.2.2
-  retrofit: ^4.1.0
+  get_it: ^7.7.0
+  flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  retrofit_generator: ^8.1.2
 
 flutter:
   uses-material-design: true
